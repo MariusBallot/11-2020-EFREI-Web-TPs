@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./main.css">
+    <title>EFREI - TODO List</title>
+</head>
+
+<body>
+    <div id="app">
+        <h1>My to do list</h1>
+        <form>
+            <input type="text" placeholder="My To Do Title" v-model="title">
+            <input type="text" placeholder="My To Do Content" v-model="content">
+            <button type="button" v-on:click="addTodo(title,content)">Add Todo</button>
+
+        </form>
+
+        <ul>
+            <li v-for="(toDo, i) in toDos">
+                <p>{{toDo.title}}</h2>
+                    <p>{{toDo.content}}</p>
+                    <p v-if="toDo.isDone">Donzo ! ✅</p>
+                    <p v-else>Not done ! ❌</p>
+                    <button v-if="!toDo.isDone" v-on:click="taskDone(i)">I did it !</button>
+            </li>
+        </ul>
+    </div>
+
+    <script src="./index.js"></script>
+</body>
+
+</html>

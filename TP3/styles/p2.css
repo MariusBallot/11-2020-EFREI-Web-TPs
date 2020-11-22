@@ -1,0 +1,9 @@
+.isWhite {
+    color: white;
+    background: black;
+}
+
+.isBlack {
+    color: black;
+    background: white;
+}

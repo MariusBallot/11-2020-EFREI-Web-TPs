@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./styles/p2.css">
+    <title>EFREI - TP 3</title>
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="inverser">Changer la couleur</button>
+        <div class="wrapper" v-bind:class="{isWhite: isWhite, isBlack: !isWhite}">
+            <div class="white" v-if="isWhite">{{myText}}</div>
+            <div class="white" v-else>Black</div>
+        </div>
+
+        <div class="computedStuff" v-bind:class="{isWhite: isWhite, isBlack: !isWhite}">{{myText}}</div>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: document.querySelector('#app'),
+            data: {
+                isWhite: false
+            },
+            mounted() {
+            },
+            methods: {
+                inverser() {
+                    this.isWhite = !this.isWhite
+                }
+            },
+            computed: {
+                myText() {
+                    let t = "White"
+                    if (!this.isWhite)
+                        t = "Black"
+                    return t
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>

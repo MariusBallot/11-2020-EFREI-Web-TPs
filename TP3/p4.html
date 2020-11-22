@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./styles/p4.css">
+    <title>EFREI - TP 3</title>
+</head>
+
+<body>
+    <div id="app">
+        <form>
+            <input type="text" placeholder="cour" v-model="myCour">
+            <button type="button" v-on:click="addCour(myCour)">add to list</button>
+
+            <select v-Model="courSelector">
+                <option v-for="cour in cours">{{cour}}</option>
+            </select>
+            <input type="text" placeholder="cour" v-model="modifiedCour">
+            <button type="button" v-on:click="modifyCour(courSelector,modifiedCour)">modify</button>
+
+
+        </form>
+
+        <article v-for="cour in cours">{{cour}}</article>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: document.querySelector('#app'),
+            data: {
+                myCour: null,
+                courSelector: null,
+                modifiedCour: null,
+                cours: ['Algorithmique', 'Structures de données', 'Programmation Web', 'Web Avancé', 'Frond-end Web Development', 'Asynchronous Event-Driven Programming with Node.js']
+            },
+            mounted() {
+            },
+            methods: {
+                addCour(c) {
+                    this.cours.push(c)
+                },
+                modifyCour(c, nc) {
+                    this.cours.forEach((cour, i) => {
+                        if (cour == c) {
+                            Vue.set(this.cours, i, nc)
+                        }
+
+                    });
+                },
+            },
+
+        })
+    </script>
+</body>
+
+</html>

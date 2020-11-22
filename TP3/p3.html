@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link rel="stylesheet" href="./styles/p3.css">
+    <title>EFREI - TP 3</title>
+</head>
+
+<body>
+    <div id="app">
+        <div class="currFruit">{{currFruit}}</div>
+        <ul>
+            <li class="fruits" v-for="(fruit, i) in fruits" v-bind:class="{isActive: currFruit==fruit}"><span
+                    v-on:click="deleteFruit(fruit)">❌</span>
+                <span v-on:click="changeFruit(fruit)">{{fruit}}</span>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        let vm = new Vue({
+            el: document.querySelector('#app'),
+            data: {
+                fruits: ['Pomme', 'Orange', 'Fraise', 'Melon', 'Cerise'],
+                currFruit: 'Pomme'
+            },
+            mounted() {
+            },
+            methods: {
+                changeFruit(myFruit) {
+                    this.currFruit = myFruit
+                },
+                deleteFruit(f) {
+                    this.fruits.forEach((fruit, i) => {
+                        if (fruit == f) {
+                            this.fruits.splice(i, 1)
+                        }
+                    });
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
