@@ -1,5 +1,5 @@
 # EFREI WEB TPs ✅👨‍💻
-A utiliser avec parcimonie, fais pour donner un ordre d'idée des choses a faire, n'hésitez pas a venir pausez vos questions
+A utiliser avec parcimonie, fait pour donner un ordre d'idée des choses à faire, n'hésitez pas à venir pausez vos questions
 
 ## Usage
 ```
