@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>EFREI TP 1 - About Page</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+    <h1>Those are my fav movies</h1>
+    <a href="./index.html">Go to home</a>
+
+
+    <table cellspacing="0">
+        <caption>Movies Table</caption>
+
+        <tr>
+            <td class="onR">Names</td>
+            <td>Dates</td>
+            <td>Note</td>
+        </tr>
+        <tr>
+            <td colspan="2" class="onR">The social network</td>
+            <td rowspan="2">4.9/5</td>
+        </tr>
+        <tr>
+            <td class="onR">Reservoir dogs</td>
+            <td>1992</td>
+
+        </tr>
+        <tr>
+            <td class="onR">The art of flight</td>
+            <td>2011</td>
+            <td>5/5</td>
+
+        </tr>
+        <tr>
+            <td class="onR">The dark knight</td>
+            <td>2008</td>
+            <td>4.4/5</td>
+
+        </tr>
+    </table>
+</body>
+
+<style>
+    * {
+        box-sizing: border-box;
+        font-family: "Avenir", sans-serif;
+    }
+
+    table {
+        border-spacing: 0;
+        border-collapse: collapse;
+    }
+
+    tr td {
+        border: solid grey 2px;
+        transition: all .3s;
+        font-size: 1.3rem;
+        padding: 20px;
+        width: 200px;
+        height: 200px;
+        border-radius: 100%;
+    }
+
+    .onR {
+        text-align: right;
+    }
+
+    tr:nth-child(2n) {
+        background: lightgray;
+    }
+
+    td:hover {
+        background: black;
+        color: white;
+        cursor: pointer;
+    }
+</style>
+
+</html>

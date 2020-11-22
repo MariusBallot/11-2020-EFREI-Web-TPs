@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>EFREI TP 2</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+    <header>
+        <div class="logoHolder">
+            <img class="tsLogo" src="./Tensorflow_logo.png" alt="">
+        </div>
+
+        <div class="formHolder">
+
+            <form onsubmit="return false;">
+                <div class="inputsHolder">
+                    <input class="prenIn" type="text" required minlength="1" placeholder="Prénom">
+                    <input class="nomIn" type="text" required minlength="1" placeholder="Nom">
+                    <input class="mailIn" type="text" required minlength="1" placeholder="Email">
+                    <select class="roleIn">
+                        <option>enseignant</option>
+                        <option>étudiant</option>
+                    </select>
+                </div>
+
+                <div class="buttHolder" class="div">
+                    <button class="add">Ajouter<span class="counter">(10s)</span></button>
+                    <button class="del">Tout Supprimer</button>
+                    <button class="flipper">do a flip</button>
+                </div>
+            </form>
+
+        </div>
+
+    </header>
+
+    <main>
+        <table>
+            <tr>
+                <th>Prenom </th>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Role</th>
+            </tr>
+
+        </table>
+
+
+    </main>
+
+    <script>
+        ///
+        ///SEVRET CODE: "DrShader"
+        ///in prénom
+        ///
+        const prenIn = document.querySelector('.prenIn')
+        const nomIn = document.querySelector('.nomIn')
+        const mailIn = document.querySelector('.mailIn')
+        const roleIn = document.querySelector('.roleIn')
+
+        const myTable = document.querySelector('table')
+
+
+        const addButt = document.querySelector('.add')
+        addButt.addEventListener('click', ajouter)
+
+        let addIsactive = false
+        resetAdder()
+
+        function resetAdder() {
+            addButt.classList.add('notActive')
+            addIsactive = false
+            let counter = 10;
+            document.querySelector('.counter').innerHTML = `(10s)`
+
+            let countdown = setInterval(() => {
+                counter--
+                document.querySelector('.counter').innerHTML = `(${counter}s)`
+            }, 1000)
+
+
+            setTimeout(() => {
+                addButt.classList.remove('notActive')
+                addIsactive = true
+                document.querySelector('.counter').innerHTML = ``
+                clearInterval(countdown)
+
+            }, 10000)
+
+            setInterval(() => {
+
+            }, 1000)
+        }
+
+        const delButt = document.querySelector('.del')
+        delButt.addEventListener('click', deleteTrs)
+
+
+        let forceClicks = 0
+        let forceCountdown
+        function forceVerifier() {
+            forceClicks++
+            if (forceClicks == 1) {
+                forceCountdown = setTimeout(() => {
+                    forceClicks = 0
+                }, 2000)
+            }
+
+            if (forceClicks >= 5) {
+                console.log("broooooo")
+                document.querySelector('form').classList.add('dissapear')
+                setTimeout(() => {
+                    document.querySelector('form').classList.remove('dissapear')
+                }, 5000)
+            }
+        }
+
+        function ajouter(e) {
+            if (!addIsactive) {
+                // alert("patience is key")
+                forceVerifier()
+            }
+
+            if (prenIn.value == "" || nomIn.value == "" || mailIn.value == "")
+                return
+
+            console.log(prenIn.value, nomIn.value, mailIn.value, roleIn.value)
+            resetAdder()
+
+
+
+            let tr = document.createElement('tr')
+            tr.classList.add('myStuff')
+            let ptd = document.createElement('td')
+            ptd.innerHTML = prenIn.value
+            tr.appendChild(ptd)
+
+            let ntd = document.createElement('td')
+            ntd.innerHTML = nomIn.value
+            tr.appendChild(ntd)
+
+            let mtd = document.createElement('td')
+            mtd.innerHTML = mailIn.value
+            tr.appendChild(mtd)
+
+            let rtd = document.createElement('td')
+            rtd.innerHTML = roleIn.value
+            tr.appendChild(rtd)
+
+            myTable.appendChild(tr)
+
+            if (prenIn.value == "DrShader")
+                startCarabinMode()
+        }
+
+
+        function deleteTrs(e) {
+            document.querySelectorAll('tr.myStuff').forEach(e => {
+                e.remove()
+            });
+
+        }
+
+
+
+
+        // When the user scrolls the page, execute myFunction
+        window.onscroll = function () { myFunction() };
+
+        // Get the header
+        var myForm = document.querySelector(".formHolder");
+
+        // Get the offset position of the navbar
+        var sticky = myForm.offsetTop;
+
+        // Add the sticky class to the myForm when you reach its scroll position. Remove "sticky" when you leave the scroll position
+        function myFunction() {
+            if (window.pageYOffset > sticky) {
+                myForm.classList.add("sticky");
+            } else {
+                myForm.classList.remove("sticky");
+            }
+        }
+
+        let daf = document.querySelector('.flipper')
+        daf.addEventListener('click', () => {
+            document.querySelector('form').classList.toggle('flip')
+        })
+
+
+        carabinFlag = false
+        function startCarabinMode() {
+            if (carabinFlag)
+                return
+            carabinFlag = true
+            document.body.style = "cursor: crosshair"
+            document.querySelectorAll('.myStuff').forEach(e => {
+                console.log(e)
+                e.addEventListener('click', () => {
+                    e.remove()
+                    console.log(e)
+                })
+            });
+        }
+    </script>
+
+</body>
+
+<style>
+    * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: "Verdana", sans-serif;
+    }
+
+    .sticky {
+        position: fixed;
+        top: 0;
+
+    }
+
+    body {
+        background: lightgray;
+    }
+
+    form {
+        background: white;
+        padding: 10px;
+        box-shadow: 10px 10px 10px black;
+        transform-origin: center;
+        transition: transform 1s ease-in-out;
+
+    }
+
+    form.dissapear {
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    form.flip {
+        transform: rotate(180deg);
+    }
+
+    .inputsHolder {
+        justify-content: space-between;
+        width: 75vw;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .notActive {
+        color: grey;
+        background-color: darkGrey;
+    }
+
+    .notActive:focus {
+        outline: none;
+    }
+
+    input,
+    select {
+        border: 0;
+        border-bottom: solid lightgray 1px;
+        padding: 10px;
+        flex-grow: 1;
+        margin: 5px;
+    }
+
+    .logoHolder {
+        margin-bottom: 30px;
+    }
+
+    .logoHolder,
+    .formHolder {
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .buttHolder {
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+
+    button {
+        text-transform: uppercase;
+        padding: 10px;
+        border: 0;
+        background: lightgray;
+    }
+
+    button:hover {
+        background: darkgray;
+    }
+
+    .tsLogo {
+        width: 100px;
+        height: auto;
+        border-radius: 100%;
+        box-shadow: black 10px 10px 10px;
+        margin-top: 20px;
+    }
+
+    main {
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+    }
+
+    table {
+        background: white;
+        width: 75vw;
+        border-collapse: collapse;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    tr {
+        text-align: center;
+
+    }
+
+    tr:not(:last-child) {
+        text-align: center;
+        border-bottom: solid black 1px;
+    }
+</style>
+
+</html>
