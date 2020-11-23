@@ -12,23 +12,27 @@
 
 <body>
     <div id="app">
-        <h1>My to do list</h1>
-        <form>
-            <input type="text" placeholder="My To Do Title" v-model="title">
-            <input type="text" placeholder="My To Do Content" v-model="content">
-            <button type="button" v-on:click="addTodo(title,content)">Add Todo</button>
+        <header>
+            <h1>My to do list</h1>
+            <form>
+                <input type="text" placeholder="My To Do Title" v-model="title">
+                <input type="text" placeholder="My To Do Content" v-model="content">
+                <button type="button" v-on:click="addTodo(title,content)">Add Todo</button>
 
-        </form>
+            </form>
+        </header>
 
-        <ul>
-            <li v-for="(toDo, i) in toDos">
-                <p>{{toDo.title}}</h2>
+        <main>
+            <ul class="todoList">
+                <li v-for="(toDo, i) in toDos" v-bind:class="{done: toDo.isDone}">
+                    <h2>{{toDo.title}}</h2>
                     <p>{{toDo.content}}</p>
-                    <p v-if="toDo.isDone">Donzo ! ✅</p>
-                    <p v-else>Not done ! ❌</p>
+                    <p class="donzo" v-if="toDo.isDone">Donzo ! ✅</p>
+                    <p class="donzo" v-else>Not done ! ❌</p>
                     <button v-if="!toDo.isDone" v-on:click="taskDone(i)">I did it !</button>
-            </li>
-        </ul>
+                </li>
+            </ul>
+        </main>
     </div>
 
     <script src="./index.js"></script>
