@@ -11,8 +11,6 @@ let vm = new Vue({
             }
         ]
     },
-    mounted() {
-    },
     methods: {
         addTodo(title, content) {
             this.toDos.push({
