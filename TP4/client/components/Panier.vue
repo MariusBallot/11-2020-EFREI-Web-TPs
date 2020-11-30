@@ -1,20 +1,18 @@
 <template>
   <div>
     <h2 class="mCart">Mon Panier</h2>
-    <article v-for="article in panier.articles" :key="article.id">
+    <article v-for="(article, i) in panier.articles" :key="i">
       <div class="article-img">
         <div
           :style="{
-            backgroundImage: 'url(' + articles[article.id].image + ')',
+            backgroundImage: 'url(' + returnArticle(article).image + ')',
           }"
         ></div>
       </div>
       <div>
-        <h2>
-          {{ articles[article.id].name }} - {{ articles[article.id].price }}€
-        </h2>
+        <h2>{{ returnArticle(article).name }} - {{ returnArticle(article).price }}€</h2>
         <h2>Quantity : {{ article.quantity }}</h2>
-        <p>{{ articles[article.id].description }}</p>
+        <p>{{ returnArticle(article).description }}</p>
       </div>
       <form>
         <h4>Modify quantity</h4>
@@ -33,7 +31,7 @@
 module.exports = {
   props: {
     articles: { type: Array, default: [] },
-    panier: { type: Object },
+    panier: { type: Object }
   },
   data() {
     return {};
@@ -43,7 +41,14 @@ module.exports = {
     updateCartArticle(article) {
       this.$emit("update-cart-article", article);
     },
-  },
+    returnArticle(article) {
+      let rart = null;
+      this.articles.forEach(art => {
+        if (art.id == article.id) rart = art;
+      });
+      return rart;
+    }
+  }
 };
 </script>
 

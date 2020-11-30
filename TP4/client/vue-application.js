@@ -38,7 +38,7 @@ var app = new Vue({
     },
     async deleteFromCart(articleId) {
       const res2 = await axios.delete(`/api/panier/${articleId}`)
-      this.panier.articles.push(res2.data)
+
       const index = this.panier.articles.findIndex(a => a.id === articleId)
       this.panier.articles.splice(index, 1)
     },
@@ -56,8 +56,6 @@ var app = new Vue({
     },
 
     async updateCartArticle(uArticle) {
-      console.log(uArticle);
-
       await axios.put(`/api/panier/${uArticle.id}`, uArticle)
       // const article = this.panier.articles.find(a => a.id === newArticle.id)
       // article.quantity = quantity

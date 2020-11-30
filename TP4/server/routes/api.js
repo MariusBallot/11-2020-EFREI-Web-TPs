@@ -119,7 +119,7 @@ router.delete('/panier/:articleId', (req, res) => {
     const ind = req.session.panier.articles.findIndex(a => a.id === id)
     req.session.panier.articles.splice(ind, 1)
 
-    res.send(req.session.panier.articles)
+    res.send()
   }
 
 })

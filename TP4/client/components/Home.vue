@@ -10,15 +10,8 @@
           <div class="sideBut">
             <button @click="deleteArticle(article.id)">Supprimer</button>
             <button @click="editArticle(article)">Modifier</button>
-            <button
-              v-if="!checkInCart(article.id)"
-              @click="addToCart(article.id)"
-            >
-              Ajouter au panier
-            </button>
-            <button v-else @click="deleteFromCart(article.id)">
-              Retirer du panier
-            </button>
+            <button v-if="!checkInCart(article.id)" @click="addToCart(article.id)">Ajouter au panier</button>
+            <button v-else @click="deleteFromCart(article.id)">Retirer du panier</button>
           </div>
         </div>
         <p>{{ article.description }}</p>
@@ -37,21 +30,13 @@
         <p>
           <textarea v-model="editingArticle.description"></textarea>
         </p>
-        <input
-          type="text"
-          v-model="editingArticle.image"
-          placeholder="Lien vers l'image"
-        />
+        <input type="text" v-model="editingArticle.image" placeholder="Lien vers l'image" />
       </div>
     </article>
     <add-article :show="showForm" @add-article="addArticle"></add-article>
     <div class="botBut">
-      <button v-if="!showForm" @click="showForm = !showForm" class="showArt">
-        Show Form
-      </button>
-      <button v-else @click="showForm = !showForm" class="showArt">
-        Hide Form
-      </button>
+      <button v-if="!showForm" @click="showForm = !showForm" class="showArt">Show Form</button>
+      <button v-else @click="showForm = !showForm" class="showArt">Hide Form</button>
     </div>
   </div>
 </template>
@@ -61,11 +46,11 @@ const AddArticle = window.httpVueLoader("./components/AddArticle.vue");
 
 module.exports = {
   components: {
-    AddArticle,
+    AddArticle
   },
   props: {
     articles: { type: Array, default: [] },
-    panier: { type: Object },
+    panier: { type: Object }
   },
   data() {
     return {
@@ -74,9 +59,9 @@ module.exports = {
         name: "",
         description: "",
         image: "",
-        price: 0,
+        price: 0
       },
-      showForm: false,
+      showForm: false
     };
   },
   methods: {
@@ -109,17 +94,17 @@ module.exports = {
         name: "",
         description: "",
         image: "",
-        price: 0,
+        price: 0
       };
     },
     checkInCart(articleId) {
       let bool = false;
-      this.panier.articles.forEach((art) => {
+      this.panier.articles.forEach(art => {
         if (art.id == articleId) bool = true;
       });
       return bool;
-    },
-  },
+    }
+  }
 };
 </script>
 
