@@ -2,28 +2,10 @@
   <div class="wrapper">
     <form v-show="show" @submit.prevent="addArticle">
       <h2>Nouveau produit à ajouter</h2>
-      <input
-        type="text"
-        v-model="newArticle.name"
-        placeholder="Nom du produit"
-        required
-      />
-      <input
-        type="number"
-        v-model="newArticle.price"
-        placeholder="Prix"
-        required
-      />
-      <textarea
-        type="text"
-        v-model="newArticle.description"
-        required
-      ></textarea>
-      <input
-        type="text"
-        v-model="newArticle.image"
-        placeholder="Lien vers l'image"
-      />
+      <input type="text" v-model="newArticle.name" placeholder="Nom du produit" required />
+      <input type="number" v-model="newArticle.price" placeholder="Prix" required />
+      <textarea type="text" v-model="newArticle.description" required></textarea>
+      <input type="text" v-model="newArticle.image" placeholder="Lien vers l'image" />
       <button type="submit">Ajouter</button>
     </form>
   </div>
@@ -32,7 +14,7 @@
 <script>
 module.exports = {
   props: {
-    show: Boolean,
+    show: Boolean
   },
   data() {
     return {
@@ -40,15 +22,15 @@ module.exports = {
         name: "",
         description: "",
         image: "",
-        price: 0,
-      },
+        price: 0
+      }
     };
   },
   methods: {
     addArticle() {
       this.$emit("add-article", this.newArticle);
-    },
-  },
+    }
+  }
 };
 </script>
  

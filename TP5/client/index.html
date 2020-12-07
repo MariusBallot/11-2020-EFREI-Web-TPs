@@ -32,7 +32,7 @@
       justify-content: center;
     }
 
-    nav a:first-child {
+    nav a:not(:last-child) {
       margin-right: 20px;
     }
   </style>
@@ -45,12 +45,13 @@
       <nav>
         <router-link to='/'>Accueil</router-link>
         <router-link to='/panier'>Panier</router-link>
+        <router-link to='/login'>Login</router-link>
       </nav>
     </header>
     <main>
-      <router-view :articles="articles" :panier="panier" @add-article="addArticle" @add-to-cart="addToCart"
-        @update-cart-article="updateCartArticle" @delete-from-cart="deleteFromCart" @delete-article="deleteArticle"
-        @update-article="updateArticle">
+      <router-view :articles="articles" :panier="panier" @add-article="addArticle" @on-pay="onPay"
+        @submit-user="submitUser" @log-user="logUser" @add-to-cart="addToCart" @update-cart-article="updateCartArticle"
+        @delete-from-cart="deleteFromCart" @delete-article="deleteArticle" @update-article="updateArticle">
       </router-view>
     </main>
   </div>

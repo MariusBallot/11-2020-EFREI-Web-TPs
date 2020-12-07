@@ -24,6 +24,9 @@
         />
       </form>
     </article>
+    <div class="buttHolder">
+      <button @click="onPay">Commander et payer</button>
+    </div>
   </div>
 </template>
 
@@ -47,6 +50,9 @@ module.exports = {
         if (art.id == article.id) rart = art;
       });
       return rart;
+    },
+    onPay() {
+      this.$emit("on-pay", this.panier);
     }
   }
 };
@@ -84,5 +90,15 @@ textarea {
 
 .mCart {
   margin-left: 20px;
+}
+
+.buttHolder {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.buttHolder button {
+  padding: 20px;
 }
 </style>
