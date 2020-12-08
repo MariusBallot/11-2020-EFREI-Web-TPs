@@ -180,7 +180,22 @@ router.route('/article/:articleId')
      * Cette route envoie un article particulier
      */
     .get(parseArticle, (req, res) => {
-        res.json(req.article)
+        client.query(
+            `SELECT * FROM articles WHERE id=$1`,
+            [req.articleId],
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                    res.status(404).json({
+                        message: `cant get article ${req.articleId} ❌`
+                    })
+                }
+                else if (result) {
+                    res.json(result.rows)
+                    console.log(result)
+                }
+            }
+        )
     })
 
     .put(parseArticle, (req, res) => {
@@ -189,18 +204,46 @@ router.route('/article/:articleId')
         const image = req.body.image
         const price = parseInt(req.body.price)
 
-        req.article.name = name
-        req.article.description = description
-        req.article.image = image
-        req.article.price = price
-        res.send()
+        client.query(
+            `UPDATE articles SET name=$1, description=$2, image=$3, price=$4 WHERE id=$5`,
+            [name, description, image, price, req.articleId],
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                    res.json({
+                        message: `articles ${req.articleId} failed update ❌`
+                    })
+                }
+                else if (result) {
+                    res.json({
+                        message: `articles ${req.articleId} updated ✅`
+                    })
+                    console.log(result)
+                }
+            }
+        )
+
     })
 
     .delete(parseArticle, (req, res) => {
-        const index = articles.findIndex(a => a.id === req.articleId)
-
-        articles.splice(index, 1) // remove the article from the array
-        res.send()
+        client.query(
+            `DELETE FROM articles WHERE id=$1`,
+            [req.articleId],
+            (err, result) => {
+                if (err) {
+                    console.log(err)
+                    res.json({
+                        message: `articles ${req.articleId} failed delete ❌`
+                    })
+                }
+                else if (result) {
+                    res.json({
+                        message: `articles ${req.articleId} deleted ✅`
+                    })
+                    console.log(result)
+                }
+            }
+        )
     })
 
 
@@ -257,16 +300,13 @@ router.post('/login', (req, res) => {
                 console.log(err)
             } else {
                 if (results.rows.length > 0) {
-                    console.log(results.rows[0].password)
 
                     bcrypt.compare(password, results.rows[0].password, function (err, result) {
                         if (err) {
                             console.log(err)
                         }
-                        if (res) {
-                            console.log(result)
+                        if (result) {
                             req.session.userId = results.rows[0].id
-                            console.log(req.session.userId)
                             res.json({ logedIn: true, message: 'loged in ✅' });
 
                         } else {
@@ -287,7 +327,6 @@ router.post('/login', (req, res) => {
 })
 
 router.get('/me', (req, res) => {
-    console.log(req.session.userId)
     if (!req.session.userId) {
         res.status(401).json({ message: 'no one connected ❌' })
     } else {
@@ -298,13 +337,13 @@ router.get('/me', (req, res) => {
 
 })
 
-
+//Routine de remplissage de la base de donnée avec les articles
+//Si la base de donnée est vide alors les articles sont pushés dans la bdd
 client.query(
     'SELECT * FROM articles', null, (err, results) => {
         if (err) {
             console.log(err)
         } else {
-            console.log(results.rows)
             if (results.rows.length == 0) {
                 articles.forEach(article => {
                     client.query(

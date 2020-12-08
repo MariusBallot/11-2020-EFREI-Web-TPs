@@ -25,7 +25,7 @@
       </form>
     </article>
     <div class="buttHolder">
-      <button @click="onPay">Commander et payer</button>
+      <button v-if="panier.articles.length>0" @click="onPay">Commander et payer</button>
     </div>
   </div>
 </template>
@@ -90,6 +90,8 @@ textarea {
 
 .mCart {
   margin-left: 20px;
+  text-transform: uppercase;
+  text-align: center;
 }
 
 .buttHolder {

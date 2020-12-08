@@ -111,9 +111,15 @@ module.exports = {
 <style scoped>
 article {
   display: flex;
-  background: #eeeeee;
+  background: white;
+  border: solid black 5px;
   padding: 20px;
   margin: 10px;
+  border-radius: 10px;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 .article-img {

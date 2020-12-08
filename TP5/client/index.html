@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Mon magasin en ligne 100% bons plans</title>
+  <title>My online store 🏬</title>
   <!-- Load Vue followed by Vue Router -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/http-vue-loader/src/httpVueLoader.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue-router/dist/vue-router.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;800&display=swap');
 
     * {
       box-sizing: border-box;
@@ -19,21 +19,44 @@
       font-family: "Rubik", sans-serif;
     }
 
+    body {
+      background: rgb(253, 190, 190);
+    }
+
     h1 {
       text-align: center;
       margin: 20px;
       text-transform: uppercase;
       text-shadow: 10px 10px 10px lightgray;
+      font-size: 3em;
     }
 
     nav {
       width: 100vw;
       display: flex;
       justify-content: center;
+      margin-bottom: 30px;
     }
 
     nav a:not(:last-child) {
       margin-right: 20px;
+    }
+
+    nav a {
+      padding: 20px;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 5px;
+      background: white;
+      border: solid grey .5px;
+      transform: translate3d(0, 0px, 0);
+      transition: all .2s;
+
+    }
+
+    nav a:hover {
+      transform: translate3d(0, -5px, 0);
+      background: #AAFFAA;
     }
   </style>
 </head>
@@ -41,7 +64,7 @@
 <body>
   <div id="app">
     <header>
-      <h1>À la bonne franquette</h1>
+      <h1>My online store</h1>
       <nav>
         <router-link to='/'>Accueil</router-link>
         <router-link to='/panier'>Panier</router-link>
